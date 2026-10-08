@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#f4f3f1" />
+    <meta name="description" content="Entrega mensal de conteúdos da Methallum para outubro de 2026." />
+    <title>Methallum | Outubro 2026</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --accent: #ff2a18;
+        --accent-dark: #c91b0d;
+        --ink: #111111;
+        --muted: #686560;
+        --paper: #ffffff;
+        --canvas: #f4f3f1;
+        --line: #d9d6d1;
+        --soft: #eceae6;
+        color-scheme: light;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        background: var(--canvas);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", sans-serif;
+        letter-spacing: 0;
+      }
+
+      button, a { font: inherit; }
+
+      a { color: inherit; }
+
+      .loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        background-color: var(--canvas);
+        background-image:
+          linear-gradient(rgba(17, 17, 17, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 17, 17, 0.055) 1px, transparent 1px);
+        background-size: 52px 52px;
+        transition: opacity 380ms ease, visibility 380ms ease;
+      }
+
+      .loading-screen.is-finished {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .loading-lockup { text-align: center; }
+
+      .loading-name {
+        margin: 0 0 22px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .loading-spinner {
+        width: 30px;
+        height: 30px;
+        margin: 0 auto 18px;
+        border: 2px solid rgba(17, 17, 17, 0.15);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 850ms linear infinite;
+      }
+
+      .loading-caption {
+        margin: 0;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      .hero {
+        min-height: 620px;
+        border-bottom: 1px solid var(--line);
+        background-color: #f8f7f5;
+        background-image:
+          linear-gradient(rgba(17, 17, 17, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 17, 17, 0.055) 1px, transparent 1px);
+        background-size: 52px 52px;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        min-height: 92px;
+        border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+      }
+
+      .signature {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+
+      .signature-mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 6px;
+        background: var(--ink);
+        color: #fff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+      }
+
+      .signature-copy strong,
+      .signature-copy span { display: block; }
+
+      .signature-copy strong { font-size: 14px; }
+
+      .signature-copy span {
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .delivery-badge,
+      .copy-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border: 1px solid var(--ink);
+        border-radius: 6px;
+        background: var(--ink);
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 160ms ease, background 160ms ease;
+      }
+
+      .delivery-badge:hover,
+      .copy-button:hover { transform: translateY(-2px); background: var(--accent-dark); }
+
+      .delivery-badge { cursor: default; }
+      a.delivery-badge { cursor: pointer; }
+
+      .hero-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.65fr);
+        gap: 72px;
+        align-items: end;
+        padding: 78px 0 48px;
+      }
+
+      .eyebrow,
+      .section-eyebrow,
+      .post-number {
+        margin: 0;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .client-name {
+        margin: 14px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(58px, 9vw, 126px);
+        font-weight: 800;
+        line-height: 0.78;
+        text-transform: uppercase;
+      }
+
+      .month-title {
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+        margin: 42px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(44px, 7vw, 92px);
+        font-weight: 700;
+        line-height: 0.85;
+        text-transform: uppercase;
+      }
+
+      .month-title span:last-child {
+        color: var(--accent);
+        font-size: 0.46em;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+        margin: 30px 0 0;
+        color: #3d3a36;
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .hero-note {
+        align-self: end;
+        padding: 28px 0 6px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid rgba(17, 17, 17, 0.12);
+      }
+
+      .summary-item {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        min-height: 104px;
+        padding: 28px 24px;
+        border-right: 1px solid rgba(17, 17, 17, 0.12);
+      }
+
+      .summary-item:first-child { padding-left: 0; }
+      .summary-item:last-child { border-right: 0; }
+
+      .summary-item strong {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 38px;
+      }
+
+      .summary-item span {
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      .hero [data-reveal] {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      body.is-ready .hero [data-reveal] {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 440ms ease, transform 440ms ease;
+        transition-delay: var(--delay, 0ms);
+      }
+
+      .posts-section { padding: 84px 0 110px; }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 34px;
+      }
+
+      .section-heading h2 {
+        margin: 10px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(42px, 5vw, 66px);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .section-heading p:last-child {
+        max-width: 360px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .posts-list { display: grid; gap: 28px; }
+
+      .post-card {
+        display: grid;
+        grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--accent);
+        border-radius: 8px;
+        background: var(--paper);
+      }
+
+      .post-visual {
+        min-height: 540px;
+        border-right: 1px solid var(--line);
+        background: #e6e5e2;
+      }
+
+      .post-content { padding: 40px 44px 46px; }
+
+      .post-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--soft);
+      }
+
+      .post-number { color: var(--accent-dark); }
+
+      .post-title {
+        max-width: 670px;
+        margin: 10px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(31px, 3vw, 44px);
+        line-height: 1.02;
+      }
+
+      .post-meta {
+        display: inline-flex;
+        margin-top: 16px;
+        padding: 6px 9px;
+        border: 1px solid #dddad5;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .copy-button {
+        flex: 0 0 auto;
+        min-height: 40px;
+        padding-inline: 14px;
+        border-color: var(--line);
+        background: #fff;
+        color: var(--ink);
+        font-size: 12px;
+      }
+
+      .copy-button:hover { color: #fff; }
+
+      .caption { padding-top: 30px; }
+
+      .caption p {
+        margin: 0 0 20px;
+        color: #302e2b;
+        font-size: 16px;
+        line-height: 1.72;
+      }
+
+      .caption .hashtags {
+        margin-top: 30px;
+        color: var(--accent-dark);
+        font-weight: 600;
+      }
+
+      .footer {
+        padding: 72px 0;
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .footer-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+      }
+
+      .footer h2 {
+        margin: 8px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(38px, 5vw, 62px);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .footer .section-eyebrow { color: #a9a6a1; }
+
+      .footer .delivery-badge {
+        border-color: #fff;
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .footer .delivery-badge:hover { background: var(--accent); color: #fff; }
+
+      .toast {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 20;
+        padding: 12px 16px;
+        border-radius: 6px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 12px;
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .toast.is-visible { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 820px) {
+        .shell { width: min(100% - 28px, 680px); }
+        .topbar { min-height: 78px; }
+        .signature-copy { display: none; }
+        .hero { min-height: 0; }
+        .hero-layout { grid-template-columns: 1fr; gap: 40px; padding: 58px 0 42px; }
+        .client-name { font-size: 68px; }
+        .month-title { margin-top: 34px; }
+        .summary { grid-template-columns: repeat(2, 1fr); }
+        .summary-item { min-height: 86px; padding: 22px 16px; border-bottom: 1px solid rgba(17, 17, 17, 0.12); }
+        .summary-item:first-child { padding-left: 16px; }
+        .summary-item:nth-child(2) { border-right: 0; }
+        .section-heading { grid-template-columns: 1fr; }
+        .post-card { grid-template-columns: 1fr; }
+        .post-visual { min-height: 440px; border-right: 0; border-bottom: 1px solid var(--line); }
+        .post-content { padding: 30px 24px 36px; }
+        .post-head { display: block; }
+        .copy-button { margin-top: 20px; }
+        .footer-layout { align-items: flex-start; flex-direction: column; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      }
+
+      .post-visual { min-height: 0; align-self: start; background: transparent; }
+      .post-image-link { display: block; }
+      .post-image { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: contain; }
+      .media-actions { padding: 16px; display: flex; flex-wrap: wrap; gap: 16px; align-items: start; }
+      .image-download { min-height: 44px; display: inline-flex; align-items: center; font-size: 13px; text-underline-offset: 4px; }
+      .post-comment { flex: 1 1 100%; }
+      .post-comment summary { cursor: pointer; color: var(--accent-dark); font-size: 13px; font-weight: 600; min-height: 44px; }
+      .comment-count { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #111; color: #fff; margin-left: 6px; }
+      .post-comment p { font-size: 14px; line-height: 1.6; margin: 0; }
+      .client-name { font-size: 126px; }
+      .month-title { font-size: 92px; }
+      .section-heading h2 { font-size: 66px; }
+      .post-title { font-size: 34px; overflow-wrap: anywhere; }
+      .footer h2 { font-size: 62px; }
+      .eyebrow, .section-eyebrow, .post-number { letter-spacing: 0; }
+      @media (max-width: 820px) {
+        .client-name { font-size: 68px; }
+        .month-title { font-size: 62px; }
+        .section-heading h2 { font-size: 42px; }
+        .footer h2 { font-size: 38px; }
+        .post-title { font-size: 31px; }
+        .post-visual { min-height: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading-screen" id="loadingScreen" aria-live="polite">
+      <div class="loading-lockup">
+        <p class="loading-name">Bruno Sonoda</p>
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p class="loading-caption">Carregando os próximos posts.</p>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="shell">
+        <div class="topbar" data-reveal style="--delay: 40ms">
+          <div class="signature">
+            <span class="signature-mark">BS</span>
+            <span class="signature-copy"><strong>Bruno Sonoda</strong><span>Planejamento de conteúdo</span></span>
+          </div>
+          <a class="delivery-badge" href="https://drive.google.com/drive/folders/15Dyjs5fsYk4lJDsxMWTeYZirlXJJjdEm?usp=sharing" target="_blank" rel="noopener noreferrer">Acessar pasta no Drive</a>
+        </div>
+
+        <div class="hero-layout">
+          <div>
+            <p class="eyebrow" data-reveal style="--delay: 90ms">Entrega mensal · Outubro 2026</p>
+            <h1 class="client-name" data-reveal style="--delay: 140ms">Methallum</h1>
+            <h2 class="month-title" data-reveal style="--delay: 190ms"><span>Outubro</span><span>2026</span></h2>
+            <p class="hero-copy" data-reveal style="--delay: 240ms">Conteúdos para Methallum no mês de outubro de 2026.</p>
+          </div>
+          <aside class="hero-note" data-reveal style="--delay: 290ms">
+            Oito conteúdos organizados para leitura, cópia das legendas e download dos arquivos finais.
+          </aside>
+        </div>
+
+        <div class="summary" data-reveal style="--delay: 340ms">
+          <div class="summary-item"><strong>8</strong><span>Posts</span></div>
+          <div class="summary-item"><strong>6</strong><span>Editorias</span></div>
+          <div class="summary-item"><strong>8</strong><span>Imagens</span></div>
+          <div class="summary-item"><strong>1</strong><span>Data especial</span></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="posts-section">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <p class="section-eyebrow">Conteúdos do mês</p>
+            <h2>Outubro 2026</h2>
+          </div>
+          <p>Artes finais e legendas completas organizadas para publicação.</p>
+        </div>
+        <div class="posts-list" id="postsList"></div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-layout">
+        <div>
+          <p class="section-eyebrow">Entrega mensal</p>
+          <h2>Methallum · Outubro 2026</h2>
+        </div>
+        <a class="delivery-badge" href="https://drive.google.com/drive/folders/15Dyjs5fsYk4lJDsxMWTeYZirlXJJjdEm?usp=sharing" target="_blank" rel="noopener noreferrer">Acessar pasta no Drive</a>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status">Legenda copiada.</div>
+
+    <script>
+      const posts = [
+        {
+          category: "PFERD ou VSM",
+          format: "Feed estático",
+          title: "PFERD | Flap disc escolhido errado cobra no acabamento",
+          image: "https://drive.google.com/thumbnail?id=12V1uZhnXheO0atbPXwIoAZctc3-PzMoi&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=12V1uZhnXheO0atbPXwIoAZctc3-PzMoi",
+          legend: `Flap disc não é tudo igual.
+
+Quando a escolha não conversa com material, geometria e agressividade necessária, o resultado aparece rápido: acabamento irregular, remoção excessiva, troca prematura e peça marcada.
+
+Antes de comprar, pergunte:
+- é corte, desbaste ou acabamento?
+- a peça é plana, curva ou com canto?
+- o operador precisa de remoção rápida ou controle?
+
+Produto certo protege tempo e padrão.
+
+Fale com a Methallum para escolher a solução PFERD adequada à sua aplicação.
+
+#Methallum
+#DistribuidorIndustrial
+#PFERDTools`
+        },
+        {
+          category: "PFERD ou VSM",
+          format: "Vídeo/Reels",
+          title: "Discos de corte STEELOX: separar abrasivo por material evita erro e contaminação",
+          image: "https://drive.google.com/thumbnail?id=1r6BJ-caUWY8MDroF4j7DqvEsjEXTSF9I&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=1r6BJ-caUWY8MDroF4j7DqvEsjEXTSF9I",
+          legend: `Cortar aço e inox como se fosse a mesma rotina pode criar problema invisível.
+
+O abrasivo certo precisa respeitar material, aplicação e risco de contaminação.
+
+Ideia de Reels: duas bancadas, dois materiais, dois discos identificados. Mostrar a diferença entre organização técnica e escolha no improviso.
+
+O ganho não está só no corte. Está no controle do processo depois dele.
+
+Fale com a Methallum para escolher abrasivos PFERD com critério.
+
+#Methallum
+#DistribuidorIndustrial
+#CorteIndustrial`
+        },
+        {
+          category: "Milwaukee",
+          format: "Feed estático",
+          title: "Bateria pronta muda o ritmo da manutenção",
+          image: "https://drive.google.com/thumbnail?id=1kQdHYSH2E0GLVV2ACAcJ8QEJC0_er2t7&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=1kQdHYSH2E0GLVV2ACAcJ8QEJC0_er2t7",
+          legend: `Ferramenta boa com bateria descarregada vira ferramenta parada.
+
+Parece detalhe, mas no turno isso muda deslocamento, fila de carga, retorno de equipe e prazo de manutenção.
+
+Para outubro, vale revisar o sistema completo: ferramenta, bateria, carregador, ponto de carga e rotina de devolução.
+
+Disponibilidade não nasce só da máquina. Nasce da gestão do conjunto.
+
+Fale com a Methallum para montar uma rotina Milwaukee mais produtiva.
+
+#Methallum
+#DistribuidorIndustrial
+#Milwaukee`
+        },
+        {
+          category: "Dicas B2B",
+          format: "Feed estático",
+          title: "Dica B2B | Retrabalho: o barato precisa ser medido no processo inteiro",
+          image: "https://drive.google.com/thumbnail?id=1g4EKeN7JvRONVu0fGxS8iXIRDVnBs3hb&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=1g4EKeN7JvRONVu0fGxS8iXIRDVnBs3hb",
+          legend: `Preço baixo não é problema.
+
+O problema é medir só o preço.
+
+Quando uma escolha gera peça refeita, consumo maior, operador cansado, acabamento irregular ou parada extra, o custo real aparece depois.
+
+Para outubro, coloque o retrabalho na conta antes de aprovar a compra.
+
+A pergunta que protege margem é: quanto esse item custa no processo inteiro?
+
+Fale com a Methallum para comprar com critério técnico.
+
+#Methallum
+#DistribuidorIndustrial
+#Retrabalho`
+        },
+        {
+          category: "Produtos e serviços gerais",
+          format: "Carrossel",
+          title: "Bancada de manutenção: organização reduz tempo de procura",
+          image: "https://drive.google.com/thumbnail?id=1OUOX0l5bBX_NVQjME_qqo9j-SNIJMZr4&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=1OUOX0l5bBX_NVQjME_qqo9j-SNIJMZr4",
+          legend: `Tempo de manutenção também se perde procurando coisa.
+
+Chave, disco, bateria, EPI, consumível, peça, carregador. Quando tudo depende de memória, a bancada vira gargalo.
+
+Organização não é estética. É redução de ruído operacional.
+
+Antes do mês ganhar velocidade, revise a bancada que sustenta a equipe.
+
+Fale com a Methallum para estruturar soluções que ajudem sua manutenção a trabalhar melhor.
+
+#Methallum
+#DistribuidorIndustrial
+#ManutencaoIndustrial`
+        },
+        {
+          category: "Telwin",
+          format: "Feed estático",
+          title: "Plasma XT 125: corte ruim transfere custo para acabamento",
+          image: "https://drive.google.com/thumbnail?id=1Gqww0TS8xP6XaFP4uWN8Gu36u8zZAy7z&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=1Gqww0TS8xP6XaFP4uWN8Gu36u8zZAy7z",
+          legend: `Corte ruim raramente termina no corte.
+
+Ele empurra custo para a preparação, para o acabamento e para o prazo.
+
+O Plasma XT 125 entra como conversa técnica quando a rotina exige corte mais estável, leitura de aplicação e equipamento compatível com a demanda.
+
+Se a equipe vive corrigindo depois, talvez o problema esteja antes: dimensionamento, regulagem, consumível ou processo.
+
+Fale com a Methallum para avaliar a solução Telwin adequada.
+
+#Methallum
+#DistribuidorIndustrial
+#CortePlasma`
+        },
+        {
+          category: "Milwaukee",
+          format: "Feed estático",
+          title: "M12 FUEL Compact Tools: compacto não significa improvisado",
+          image: "https://drive.google.com/thumbnail?id=1P4pPU23uLAyV2upsRVKAmL702bNQqHIa&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=1P4pPU23uLAyV2upsRVKAmL702bNQqHIa",
+          legend: `Compacto não é sinônimo de fraco.
+
+Em manutenção, acesso restrito muda tudo: posição do operador, tempo de execução, segurança e chance de finalizar sem desmontar meia máquina.
+
+M12 FUEL Compact Tools entra como decisão técnica quando tamanho, controle e mobilidade pesam no serviço.
+
+A compra certa monta sistema: ferramenta, bateria, acessório e aplicação.
+
+Fale com a Methallum para montar o conjunto Milwaukee certo para sua equipe.
+
+#Methallum
+#DistribuidorIndustrial
+#Milwaukee`
+        },
+        {
+          category: "Datas comemorativas",
+          format: "Feed estático",
+          title: "17/10 - Dia do Eletricista: técnica e segurança mantêm a indústria ligada",
+          image: "https://drive.google.com/thumbnail?id=1D9K5-Rdj4GZli3mldLcSgzWj6ZjHAVNQ&sz=w1600",
+          download: "https://drive.google.com/uc?export=download&id=1D9K5-Rdj4GZli3mldLcSgzWj6ZjHAVNQ",
+          legend: `17/10 - Dia do Eletricista
+
+Quando uma máquina volta a operar, um painel é revisado ou uma manutenção acontece com segurança, existe conhecimento técnico por trás do resultado. ⚡
+
+Na indústria, o trabalho do eletricista pede leitura de risco, procedimento, EPI e ferramenta adequada. Não é espaço para improviso: cada escolha protege pessoas, equipamentos e continuidade operacional. 🧰
+
+Hoje, a Methallum reconhece quem transforma técnica em energia para manter a produção em movimento.
+
+Fale com a Methallum para encontrar ferramentas e soluções adequadas à rotina da sua equipe.
+
+#Methallum
+#DistribuidorIndustrial
+#DiaDoEletricista`
+        }
+      ];
+
+      const escapeHtml = (value) => String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+      const captionHtml = (legend) => {
+        const blocks = legend.trim().split(/\n\s*\n/);
+        return blocks.map((block) => {
+          const isHashtag = block.trim().startsWith("#");
+          return `<p class="${isHashtag ? "hashtags" : ""}">${escapeHtml(block).replaceAll("\n", "<br>")}</p>`;
+        }).join("");
+      };
+
+      document.getElementById("postsList").innerHTML = posts.map((post, index) => `
+        <article class="post-card">
+          <div class="post-visual">
+            <a class="post-image-link" href="${escapeHtml(post.image)}" target="_blank" rel="noopener"><img class="post-image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" width="1080" height="1350" loading="${index === 0 ? "eager" : "lazy"}"></a>
+            <div class="media-actions"><a class="image-download" href="${escapeHtml(post.download)}" target="_blank" rel="noopener noreferrer">Baixar imagem</a>
+              ${post.comment ? `<details class="post-comment"><summary>Comentário <span class="comment-count">1</span></summary><p>${escapeHtml(post.comment)}</p></details>` : ""}
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <div>
+                <p class="post-number">Post ${String(index + 1).padStart(2, "0")}</p>
+                <h3 class="post-title">${escapeHtml(post.title)}</h3>
+                <span class="post-meta">${escapeHtml(post.category)} · ${escapeHtml(post.format)}</span>
+              </div>
+              <button class="copy-button" type="button" data-copy="${index}">Copiar legenda</button>
+            </div>
+            <div class="caption">${captionHtml(post.legend)}</div>
+          </div>
+        </article>
+      `).join("");
+
+      const toast = document.getElementById("toast");
+      let toastTimer;
+
+      document.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-copy]");
+        if (!button) return;
+        const post = posts[Number(button.dataset.copy)];
+        try {
+          await navigator.clipboard.writeText(post.legend);
+        } catch (error) {
+          const input = document.createElement("textarea");
+          input.value = post.legend;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          input.remove();
+        }
+        button.textContent = "Copiada";
+        window.setTimeout(() => { button.textContent = "Copiar legenda"; }, 1400);
+        toast.classList.add("is-visible");
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 1800);
+      });
+
+      window.addEventListener("load", () => {
+        window.setTimeout(() => {
+          document.getElementById("loadingScreen").classList.add("is-finished");
+          document.body.classList.add("is-ready");
+        }, 520);
+      });
+    </script>
+  </body>
+</html>
